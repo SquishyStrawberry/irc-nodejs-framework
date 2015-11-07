@@ -1,3 +1,4 @@
-module.exports = function() {
-    console.log("Hello World!")
-}
+module.exports = {
+    "IRCBot": require("./bot.js")
+};
+
