@@ -1,0 +1,21 @@
+{
+  "name": "irc-framework",
+  "version": "0.0.1",
+  "description": "A framework for IRC in NodeJS",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SquishyStrawberry/irc-nodejs-framework.git"
+  },
+  "keywords": [
+    "irc"
+  ],
+  "author": "SquishyStrawberry",
+  "bugs": {
+    "url": "https://github.com/SquishyStrawberry/irc-nodejs-framework/issues"
+  },
+  "homepage": "https://github.com/SquishyStrawberry/irc-nodejs-framework#readme"
+}
