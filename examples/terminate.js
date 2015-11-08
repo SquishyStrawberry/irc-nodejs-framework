@@ -17,27 +17,26 @@ fs.readFile("./host.json", function(err, data) {
 
     // TODO Use the dedicated join/part events.
     bot.on("JOIN", function(e) {
-        console.log("JOIN", e.args);
         var chan = e.args[0].substr(1).trim();
-        console.info("[" + e.nick, 
+        console.info("[" + e.sender.nick, 
                      "joined channel", 
                      chan + "]");
         this.sendMessage("Hey" + 
-                         (e.nick === this.nick ? "" : " " + e.nick) + "!", chan);
+                         (e.sender.nick === this.nick ? "" : " " + e.sender.nick) + "!", chan);
     });
 
     bot.on("PART", function(e) {
         var chan = e.args[0].trim();
-        console.info("[" + e.nick, 
+        console.info("[" + e.sender.nick, 
                      "left channel", 
                      chan + "]");
-        if (e.nick !== this.nick) {
-            this.sendMessage("Bye " + e.nick + "!", chan);
+        if (e.sender.nick !== this.nick) {
+            this.sendMessage("Bye " + e.sender.nick + "!", chan);
         }
     });
 
     bot.on("message", function(msg) {
-        console.info("<" + msg.nick, "to", msg.recipient + ">", msg.text);
+        console.info("<" + msg.sender.nick, "to", msg.recipient + ">", msg.text);
     });
 
     bot.on("commandTerminate", function() {
