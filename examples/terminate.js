@@ -1,4 +1,4 @@
-var irc = require("./lib/main.js"),
+var irc = require("../lib/main.js"),
     fs = require("fs");
 
 var host = "irc.editingarchive.com",
