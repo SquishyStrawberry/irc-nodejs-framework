@@ -9,31 +9,35 @@ fs.readFile("./host.json", function(err, data) {
 
     var info = JSON.parse(data.toString());
     var bot = new irc.IRCBot(info.host, info.port,
-                             info.nick, info.channel);
+                             info.nick, info.channels);
 
     process.on("SIGINT", function() {
         bot.quit("Goodbye");
     });
 
-    bot.on("join", function(e) {
+    // TODO Use the dedicated join/part events.
+    bot.on("JOIN", function(e) {
+        console.log("JOIN", e.args);
+        var chan = e.args[0].substr(1).trim();
         console.info("[" + e.nick, 
                      "joined channel", 
-                     e.args[0].substr(1).trim() + "]");
+                     chan + "]");
         this.sendMessage("Hey" + 
-                         (e.nick === this.nick ? "" : " " + e.nick) + "!");
+                         (e.nick === this.nick ? "" : " " + e.nick) + "!", chan);
     });
 
-    bot.on("part", function(e) {
+    bot.on("PART", function(e) {
+        var chan = e.args[0].trim();
         console.info("[" + e.nick, 
                      "left channel", 
-                     (e.args[0] || bot.channel) + "]");
+                     chan + "]");
         if (e.nick !== this.nick) {
-            this.sendMessage("Bye " + e.nick + "!");
+            this.sendMessage("Bye " + e.nick + "!", chan);
         }
     });
 
     bot.on("message", function(msg) {
-        console.info("<" + msg.nick + ">", msg.text);
+        console.info("<" + msg.nick, "to", msg.recipient + ">", msg.text);
     });
 
     bot.on("commandTerminate", function() {
