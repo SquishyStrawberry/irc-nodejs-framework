@@ -1,0 +1,6 @@
+{
+    "host": "irc.host.tld",
+    "port": 6667,
+    "nick": "jsrocks",
+    "channel": "#bottest"
+}
